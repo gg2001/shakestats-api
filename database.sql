@@ -15,6 +15,7 @@ CREATE TABLE names(
     hash text PRIMARY KEY NOT NULL,
     name text NOT NULL,
     claimed boolean NOT NULL DEFAULT FALSE,
+    in_use boolean NOT NULL DEFAULT FALSE,
     value integer,
     highest integer,
     bids integer,
