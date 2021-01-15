@@ -37,7 +37,7 @@ const client = new NodeClient(clientOptions);
 	const dateOI = {};
 	const dateBids = {};
 
-	for (let i = 0; i < 50155; i++) {
+	for (let i = 0; i < 50582; i++) {
 		console.log(i);
 		const contents = await client.execute('getblockbyheight', [i, 1, 1]);
 		const blockDate = new Date(contents.time * 1000).toISOString().split('T')[0];
@@ -89,17 +89,30 @@ const client = new NodeClient(clientOptions);
 	
 	for (const dateKey in dates) {
 		datesJSON.push({
-			name: dates[dateKey],
-			bids: dateBids[dates[dateKey]],
-			openInterest: dateOI[dates[dateKey]],
+			"name": dates[dateKey],
+			"Bids": dateBids[dates[dateKey]],
+			"Open Interest": dateOI[dates[dateKey]],
 		});
 	}
 
 	console.log(datesJSON);
 
 	sortByKey(names, "col2");
-	fs.writeFileSync('names.json', JSON.stringify(names));
-	fs.writeFileSync('dates.json', JSON.stringify(datesJSON));
+
+	const returnFinalNames = [];
+
+	for (const property in names) {
+		returnFinalNames.push({
+			col1: (property + 1).toString(),
+			col2: names[property].col1,
+			col3: names[property].col2,
+			col4: names[property].col3 / 1000000,
+			col5: names[property].col4 / 1000000
+		});
+	}
+
+	fs.writeFileSync('names-3.json', JSON.stringify(returnFinalNames));
+	fs.writeFileSync('dates-3.json', JSON.stringify(datesJSON));
 	console.log(openInterest);
 	console.log(totalBids);
 })();
