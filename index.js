@@ -37,7 +37,7 @@ const client = new NodeClient(clientOptions);
 	const dateOI = {};
 	const dateBids = {};
 
-	for (let i = 0; i < 50582; i++) {
+	for (let i = 0; i < 50789; i++) {
 		console.log(i);
 		const contents = await client.execute('getblockbyheight', [i, 1, 1]);
 		const blockDate = new Date(contents.time * 1000).toISOString().split('T')[0];
@@ -111,8 +111,8 @@ const client = new NodeClient(clientOptions);
 		});
 	}
 
-	fs.writeFileSync('names-3.json', JSON.stringify(returnFinalNames));
-	fs.writeFileSync('dates-3.json', JSON.stringify(datesJSON));
+	fs.writeFileSync('names-4.json', JSON.stringify(returnFinalNames));
+	fs.writeFileSync('dates-4.json', JSON.stringify(datesJSON));
 	console.log(openInterest);
 	console.log(totalBids);
 })();
