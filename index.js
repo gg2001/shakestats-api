@@ -100,19 +100,20 @@ const client = new NodeClient(clientOptions);
 	sortByKey(names, "col2");
 
 	const returnFinalNames = [];
-
+	let counter = 1;
 	for (const property in names) {
 		returnFinalNames.push({
-			col1: (property + 1).toString(),
+			col1: counter,
 			col2: names[property].col1,
 			col3: names[property].col2,
 			col4: names[property].col3 / 1000000,
 			col5: names[property].col4 / 1000000
 		});
+		counter++;
 	}
 
-	fs.writeFileSync('names-4.json', JSON.stringify(returnFinalNames));
-	fs.writeFileSync('dates-4.json', JSON.stringify(datesJSON));
+	fs.writeFileSync('names-5.json', JSON.stringify(returnFinalNames));
+	fs.writeFileSync('dates-5.json', JSON.stringify(datesJSON));
 	console.log(openInterest);
 	console.log(totalBids);
 })();
