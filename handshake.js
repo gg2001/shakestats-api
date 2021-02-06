@@ -130,8 +130,8 @@ const client = new NodeClient(clientOptions);
 		counter++;
 	}
 
-	fs.writeFileSync('names.json', JSON.stringify(returnFinalNames));
-	fs.writeFileSync('dates.json', JSON.stringify(datesJSON));
+	fs.writeFileSync('names-4.json', JSON.stringify(returnFinalNames));
+	fs.writeFileSync('dates-4.json', JSON.stringify(datesJSON));
 	console.log(openInterest);
 	console.log(totalBids);
 	console.log(totalNames, names.length);
