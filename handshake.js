@@ -42,7 +42,7 @@ const client = new NodeClient(clientOptions);
 	const dateBurns = {};
 	const dateNames = {};
 
-	for (let i = 0; i < 53305; i++) {
+	for (let i = 0; i < 53860; i++) {
 		console.log(i);
 		const contents = await client.execute('getblockbyheight', [i, 1, 1]);
 		const blockDate = new Date(contents.time * 1000).toISOString().split('T')[0];
