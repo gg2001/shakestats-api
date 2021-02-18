@@ -1,17 +1,26 @@
-const { PrismaClient } = require('@prisma/client')
+require('dotenv').config();
+const { NodeClient } = require('hs-client');
+const { Network } = require('hsd');
+const network = Network.get('main');
 
-const prisma = new PrismaClient()
+const express = require('express');
+const app = express();
+const port = 8000;
 
-async function main() {
-  // ... you will write your Prisma Client queries here
-  const allUsers = await prisma.block.findMany()
-  console.log(allUsers)
+const clientOptions = {
+	network: network.type,
+	port: network.rpcPort,
+	apiKey: process.env.HSD_APIKEY
 }
 
-main()
-  .catch(e => {
-    throw e
-  })
-  .finally(async () => {
-    await prisma.$disconnect()
-  })
+const client = new NodeClient(clientOptions);
+
+
+app.get('/info', async (req, res) => {
+  const clientinfo = await client.getInfo();
+  res.send(clientinfo);
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`)
+});

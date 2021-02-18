@@ -42,7 +42,7 @@ const client = new NodeClient(clientOptions);
 	const dateBurns = {};
 	const dateNames = {};
 
-	for (let i = 0; i < 55342; i++) {
+	for (let i = 0; i < 55416; i++) {
 		console.log(i);
 		const contents = await client.execute('getblockbyheight', [i, 1, 1]);
 		const blockDate = new Date(contents.time * 1000).toISOString().split('T')[0];
@@ -51,7 +51,7 @@ const client = new NodeClient(clientOptions);
 			dateOI[blockDate] = 0;
 			dateBids[blockDate] = 0;
 			dateTxs[blockDate] = 0;
-			dateNames[blockDate] = 0;
+			dateNames[blockDate] = totalNames;
 			dateBurns[blockDate] = totalBurned;
 		}
 		for (let j = 0; j < contents.tx.length; j++) {
