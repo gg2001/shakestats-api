@@ -14,23 +14,23 @@ model Block {
   height       Int      @default(autoincrement()) @id
   hash         String
   createdAt    DateTime
-  bids         Int
   openInterest Int
   transactions Int
-  burned       Int?
-  locked       Int?
-  created      Int?
+  bids         Int
+  names        Int
+  burned       Int
+  maxSupply    Int
 }
 
 model Date {
   date         DateTime @id
   startHeight  Int
-  bids         Int
   openInterest Int
   transactions Int
-  burned       Int?
-  locked       Int?
-  created      Int?
+  bids         Int
+  names        Int
+  burned       Int
+  maxSupply    Int
 }
 
 model Name {
@@ -40,6 +40,4 @@ model Name {
   openInterest Int
   value        Int
   highestBid   Int
-  claimed      Boolean @default(false)
-  inUse        Boolean @default(false)
 }
