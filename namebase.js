@@ -15,6 +15,7 @@ const dates = [];
 const dateToValue = {}; 
 const names = [];
 const nameToSale = {};
+const nameToDate = {};
 
 const datesJSON = [];
 
@@ -31,7 +32,8 @@ for (let i = 0; i < 20000; i += 100) {
           dates.push(sellDate);
         }
         dateToValue[sellDate] += parseInt(finalData.domains[j].amount);
-        nameToSale[finalData.domains[j].name] = parseInt(finalData.domains[j].amount);
+        nameToSale[finalData.domains[j].name] = parseFloat(finalData.domains[j].amount);
+        nameToDate[finalData.domains[j].name] = finalData.domains[j].created_at;
         //names.push(finalData.domains[j].name);
         //console.log(dateToValue[sellDate], sellDate);
       }
@@ -49,7 +51,8 @@ for (const dateKey in dates) {
 for (const property in nameToSale) {
   names.push({
     col1: property,
-    col2: nameToSale[property]
+    col2: nameToSale[property],
+    col3: nameToDate[property]
   });
 }
 sortByKey(names, "col2");
@@ -61,6 +64,7 @@ const returnFinalNames = [];
 			col1: counter,
 			col2: names[property].col1,
 			col3: names[property].col2 / 1000000,
+      col4: names[property].col3
 		});
 		counter++;
 	}
