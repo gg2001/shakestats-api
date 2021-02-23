@@ -13,6 +13,7 @@ function sortByKey(array, key) {
 (async () => {
 const dates = [];
 const dateToValue = {}; 
+const dateToSales = {};
 const names = [];
 const nameToSale = {};
 const nameToDate = {};
@@ -29,13 +30,14 @@ for (let i = 0; i < 20000; i += 100) {
         const sellDate = new Date(finalData.domains[j].created_at).toISOString().split('T')[0];
         if (!(sellDate in dateToValue)) {
           dateToValue[sellDate] = 0;
+          dateToSales[sellDate] = 0;
           dates.push(sellDate);
         }
-        dateToValue[sellDate] += parseInt(finalData.domains[j].amount);
+        dateToValue[sellDate] += parseFloat(finalData.domains[j].amount);
+        dateToSales[sellDate] += 1
         nameToSale[finalData.domains[j].name] = parseFloat(finalData.domains[j].amount);
         nameToDate[finalData.domains[j].name] = finalData.domains[j].created_at;
         //names.push(finalData.domains[j].name);
-        //console.log(dateToValue[sellDate], sellDate);
       }
 
   
@@ -44,7 +46,8 @@ for (let i = 0; i < 20000; i += 100) {
 for (const dateKey in dates) {
   datesJSON.push({
     "name": dates[dates.length - dateKey - 1],
-    "Sales": dateToValue[dates[dates.length - dateKey - 1]] / 1000000,
+    "Volume": dateToValue[dates[dates.length - dateKey - 1]] / 1000000,
+    "Sales": dateToSales[dates[dates.length - dateKey - 1]]
   });
 }
 
