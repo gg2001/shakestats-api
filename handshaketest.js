@@ -31,9 +31,8 @@ const client = new NodeClient(clientOptions);
 	const nameValue = {};
 	const nameHighest = {};
 
-	let totalBids = 0;
-	let totalNames = 0;
-	let totalBurned = 0;
+	let totalNames = 580215;
+	let totalBurned = 18278097.19253024;
 
 	const dates = [];
 
@@ -53,7 +52,7 @@ const client = new NodeClient(clientOptions);
 	const blockBurns = {};
 	const blockNames = {};
 
-	for (let i = 0; i < 55612; i++) {
+	for (let i = 55612; i < 56444; i++) {
 		console.log(i);
 		const contents = await client.execute('getblockbyheight', [i, 1, 1]);
 		const blockDate = new Date(contents.time * 1000).toISOString().split('T')[0];
@@ -82,14 +81,13 @@ const client = new NodeClient(clientOptions);
 				if (contents.tx[j].vout[k].covenant.action === "BID") {
 					dateBids[blockDate]++;
 					blockBids[i]++;
-					totalBids++;
 					if (!(contents.tx[j].vout[k].covenant.items[0] in hashToName)) {
 						hashToName[contents.tx[j].vout[k].covenant.items[0]] = await client.execute('getnamebyhash', [contents.tx[j].vout[k].covenant.items[0]]);
 						dateNames[blockDate]++;
 						blockNames[i]++;
 						totalNames++;
 					}
-					console.log(hashToName[contents.tx[j].vout[k].covenant.items[0]]);
+					// console.log(hashToName[contents.tx[j].vout[k].covenant.items[0]]);
 					if (!(hashToName[contents.tx[j].vout[k].covenant.items[0]] in nameOI)) {
 						nameOI[hashToName[contents.tx[j].vout[k].covenant.items[0]]] = contents.tx[j].vout[k].value;
 					} else {
@@ -161,7 +159,6 @@ const client = new NodeClient(clientOptions);
 	
 	console.log(dates);
 	console.log(names);
-	console.log(totalBids);
 	console.log(totalBurned);
 	console.log(names.length);
 	console.log(blocks.length);

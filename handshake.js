@@ -31,8 +31,8 @@ const client = new NodeClient(clientOptions);
 
 	let openInterest = 0;
 	let totalBids = 0;
-	let totalNames = 0;
-	let totalBurned = 0;
+	let totalNames = 580215;
+	let totalBurned = 18278097.19253024;
 
 	const dates = [];
 	const datesJSON = [];
@@ -42,7 +42,7 @@ const client = new NodeClient(clientOptions);
 	const dateBurns = {};
 	const dateNames = {};
 
-	for (let i = 0; i < 55416; i++) {
+	for (let i = 55612; i < 56443; i++) {
 		console.log(i);
 		const contents = await client.execute('getblockbyheight', [i, 1, 1]);
 		const blockDate = new Date(contents.time * 1000).toISOString().split('T')[0];
