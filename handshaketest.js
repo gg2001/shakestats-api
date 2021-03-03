@@ -31,8 +31,8 @@ const client = new NodeClient(clientOptions);
 	const nameValue = {};
 	const nameHighest = {};
 
-	let totalNames = 616059;
-	let totalBurned = 19094541.4839953;
+	let totalNames = 682291;
+	let totalBurned = 19263017.41710091;
 
 	const dates = [];
 
