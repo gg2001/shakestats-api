@@ -31,8 +31,8 @@ const client = new NodeClient(clientOptions);
 	const nameValue = {};
 	const nameHighest = {};
 
-	let totalNames = 748167;
-	let totalBurned = 19485695.30508984;
+	let totalNames = 774140;
+	let totalBurned = 19529014.58181321;
 
 	const dates = [];
 
@@ -52,7 +52,7 @@ const client = new NodeClient(clientOptions);
 	const blockBurns = {};
 	const blockNames = {};
 
-	for (let i = 58003; i < (clientinfo.chain.height); i++) {
+	for (let i = 58197; i < (clientinfo.chain.height); i++) {
 		console.log(i);
 		const contents = await client.execute('getblockbyheight', [i, 1, 1]);
 		const blockDate = new Date(contents.time * 1000).toISOString().split('T')[0];
